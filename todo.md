@@ -1,4 +1,4 @@
-- ## ~ make a window ~
+- ## ~~make a window~~
 
-- ## ~ make app struct ~
+- ## ~~make app struct~~
 - ## make a draw functions
