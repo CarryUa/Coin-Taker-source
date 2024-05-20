@@ -4,8 +4,11 @@
 #include<user/init.h>
 int main(int argc, char* argv[]) {
     App app;
-    app = Init;
+    int i = 0;
+    app = Init(app);
     while (true) {
+        i++;
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "i = %d", i);
         SDL_Delay(16);
     }
     return 0;
