@@ -8,13 +8,15 @@ int main(int argc, char* argv[]) {
     RGBA backgroundColor = { 0, 226, 255, 1 };
     App app;
     app = Init(app);
-    Entity player({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { 32,32 }, 3, loadTexture("src/textures/logo_icon_248042.png", app));
+    Player player({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { 32,32 }, { false, false, false, false }, loadTexture("src/textures/logo_icon_248042.png", app));
     while (true) {
         processScene(app, backgroundColor);
         SDL_Delay(16);
         draw(player, app);
+        player.processMovement();
         player.getInput();
         presentScene(app);
+        SDL_Delay(0);
     }
     SDL_Quit();
     return 0;

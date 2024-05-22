@@ -17,46 +17,21 @@ typedef struct {
     int w;
     int h;
 } Size;
+typedef struct {
+    bool up;
+    bool down;
+    bool left;
+    bool right;
+} Direction;
 class Entity {
 protected:
     Possition possition;
     Size size;
-    int direction;
+    Direction direction;
     bool isMove = false;
     SDL_Texture* texture;
-    void doKeyDown(SDL_KeyboardEvent* event) {
-        switch (event->keysym.scancode) {
-        case SDL_SCANCODE_A:
-            isMove = true;
-            direction = 1;
-        case SDL_SCANCODE_W:
-            isMove = true;
-            direction = 2;
-        case SDL_SCANCODE_D:
-            isMove = true;
-            direction = 3;
-        case SDL_SCANCODE_S:
-            isMove = true;
-            direction = 4;
-        }
-    }
-    void doKeyUp(SDL_KeyboardEvent* event) {
-        if (event->repeat == 0)
-        {
-            switch (event->keysym.scancode) {
-            case SDL_SCANCODE_A:
-                isMove = false;
-            case SDL_SCANCODE_W:
-                isMove = false;
-            case SDL_SCANCODE_D:
-                isMove = false;
-            case SDL_SCANCODE_S:
-                isMove = false;
-            }
-        }
-    }
 public:
-    Entity(Possition _pos, Size _size, int _direction, SDL_Texture* _texture)
+    Entity(Possition _pos, Size _size, Direction _direction, SDL_Texture* _texture)
     {
         possition = _pos;
         size = _size;
@@ -69,7 +44,7 @@ public:
     Size getSize() {
         return size;
     }
-    int getDirection() {
+    Direction getDirection() {
         return direction;
     }
     SDL_Texture* getTexture() {
@@ -87,10 +62,64 @@ public:
     void setSize(Size _size) {
         size = _size;
     }
-    void setDirection(int _direction) {
+    void setDirection(Direction _direction) {
         direction = _direction;
     }
     void changeTexture(SDL_Texture* _texture) {
+        texture = _texture;
+    }
+    void processMovement() {
+        if (isMove) {
+            if (direction.left)
+                possition.x -= 4;
+            if (direction.up)
+                possition.y -= 4;
+            if (direction.right)
+                possition.x += 4;
+            if (direction.down)
+                possition.y += 4;
+        }
+    }
+};
+class Player : public Entity {
+protected:
+    void doKeyDown(SDL_KeyboardEvent* event) {
+        if (event->keysym.scancode == SDL_SCANCODE_A) {
+            isMove = direction.left = true;
+        }
+        if (event->keysym.scancode == SDL_SCANCODE_W) {
+            isMove = direction.up = true;
+        }
+        if (event->keysym.scancode == SDL_SCANCODE_D) {
+            isMove = direction.right = true;
+        }
+        if (event->keysym.scancode == SDL_SCANCODE_S) {
+            isMove = direction.down = true;
+
+        }
+    }
+    void doKeyUp(SDL_KeyboardEvent* event) {
+
+        if (event->keysym.scancode == SDL_SCANCODE_A) {
+            isMove = direction.left = false;
+        }
+        if (event->keysym.scancode == SDL_SCANCODE_W) {
+            isMove = direction.up = false;
+        }
+        if (event->keysym.scancode == SDL_SCANCODE_D) {
+            isMove = direction.right = false;
+        }
+        if (event->keysym.scancode == SDL_SCANCODE_S) {
+            isMove = direction.down = false;
+        }
+
+    }
+public:
+    Player(Possition _pos, Size _size, Direction _direction, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _texture)
+    {
+        possition = _pos;
+        size = _size;
+        direction = _direction;
         texture = _texture;
     }
     void getInput() {
