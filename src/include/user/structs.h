@@ -1,4 +1,7 @@
 #include <SDL2/SDL.h>
+#include <ctime>
+#include <cstdlib>
+#include <user/defines.h>
 typedef struct {
     SDL_Window* window;
     SDL_Renderer* renderer;
@@ -136,5 +139,19 @@ public:
                 doKeyUp(&event.key);
             }
         }
+    }
+};
+class Coin : public Entity {
+public:
+    Coin(Possition _pos, Size _size, Direction _direction, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _texture) {
+        possition = _pos;
+        size = _size;
+        direction = _direction;
+        texture = _texture;
+    }
+    void randomizePossition() {
+        srand(time(NULL));
+        possition.x = rand() % SCREEN_WIDTH;
+        possition.y = rand() % SCREEN_HEIGHT;
     }
 };
