@@ -8,4 +8,5 @@
 - ## add a coin
   - ## ~~add a coin class and methods~~
   - ## ~~add a ChekIfTouch function~~
+  - ## fix a random possition generator
   - ## add score counter
