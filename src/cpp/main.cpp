@@ -25,8 +25,7 @@ int main(int argc, char* argv[]) {
             coin.randomizePossition();
             score++;
         }
-        SDL_
-            presentScene(app);
+        SDL_presentScene(app);
 
         SDL_Delay(0);
     }
