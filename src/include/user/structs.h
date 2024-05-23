@@ -150,7 +150,7 @@ public:
         texture = _texture;
     }
     void randomizePossition() {
-        srand(time(NULL));
+
         possition.x = rand() % SCREEN_WIDTH;
         possition.y = rand() % SCREEN_HEIGHT;
         SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "possition: %d", possition.x, " %s", possition.y);

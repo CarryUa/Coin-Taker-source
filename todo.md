@@ -8,5 +8,9 @@
 - ## add a coin
   - ## ~~add a coin class and methods~~
   - ## ~~add a ChekIfTouch function~~
-  - ## fix a random possition generator
+  - ## ~~fix a random possition generator~~
   - ## add score counter
+- ## add an enemy
+  - ## create a texture
+  - ## add an enemy class
+  - ## add a movement

@@ -7,24 +7,24 @@
 #include<user/funcs.h>
 
 int main(int argc, char* argv[]) {
+    srand(time(NULL));
     RGBA backgroundColor = { 0, 226, 255, 1 };
     int score = 0;
     App app;
     app = Init(app);
-    Coin coin({ SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2 + 100 }, { 32,32 }, { false, false, false, false }, loadTexture("src/textures/logo_icon_248042.png", app));
-    Player player({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { 32,32 }, { false, false, false, false }, loadTexture("src/textures/logo_icon_248042.png", app));
+    Coin coin({ SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2 + 100 }, { 32,32 }, { false, false, false, false }, loadTexture("src/textures/coin.png", app));
+    Player player({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { 32,32 }, { false, false, false, false }, loadTexture("src/textures/hero.png", app));
     while (true) {
         processScene(app, backgroundColor);
         SDL_Delay(16);
         draw(player, app);
         draw(coin, app);
-        player.processMovement();
         player.getInput();
+        player.processMovement();
         if (isTouching(player, coin))
         {
             coin.randomizePossition();
             score++;
-            SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "score: %d", score);
         }
         presentScene(app);
         SDL_Delay(0);
