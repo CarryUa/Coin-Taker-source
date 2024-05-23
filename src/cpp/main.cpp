@@ -1,5 +1,6 @@
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_main.h>
+#include<SDL2/SDL_ttf.h>
 #include<user/defines.h>
 #include<user/structs.h>
 #include<user/init.h>
