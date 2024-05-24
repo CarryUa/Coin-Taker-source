@@ -36,14 +36,16 @@ protected:
     Size size;
     Direction direction;
     bool isMove = false;
+    int moveSpeed;
     SDL_Texture* texture;
 public:
-    Entity(Possition _pos, Size _size, Direction _direction, SDL_Texture* _texture)
+    Entity(Possition _pos, Size _size, Direction _direction, int _moveSpeed, SDL_Texture* _texture)
     {
         possition = _pos;
         size = _size;
         direction = _direction;
         texture = _texture;
+        moveSpeed = _moveSpeed;
     }
     Possition getPossition() {
         return possition;
@@ -78,13 +80,13 @@ public:
     void processMovement() {
         if (isMove) {
             if (direction.left)
-                possition.x -= 4;
+                possition.x -= moveSpeed;
             if (direction.up)
-                possition.y -= 4;
+                possition.y -= moveSpeed;
             if (direction.right)
-                possition.x += 4;
+                possition.x += moveSpeed;
             if (direction.down)
-                possition.y += 4;
+                possition.y += moveSpeed;
         }
     }
 };
@@ -122,7 +124,7 @@ protected:
 
     }
 public:
-    Player(Possition _pos, Size _size, Direction _direction, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _texture)
+    Player(Possition _pos, Size _size, Direction _direction, int _moveSpeed, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture)
     {
         possition = _pos;
         size = _size;
@@ -147,15 +149,49 @@ public:
 };
 class Coin : public Entity {
 public:
-    Coin(Possition _pos, Size _size, Direction _direction, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _texture) {
+    Coin(Possition _pos, Size _size, Direction _direction, int _moveSpeed, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture) {
         possition = _pos;
         size = _size;
         direction = _direction;
         texture = _texture;
+        moveSpeed = _moveSpeed;
     }
     void randomizePossition() {
 
         possition.x = rand() % SCREEN_WIDTH;
         possition.y = rand() % SCREEN_HEIGHT;
+    }
+};
+class Enemy : public Entity {
+public:
+    Enemy(Possition _pos, Size _size, Direction _direction, int _moveSpeed, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture) {
+        possition = _pos;
+        size = _size;
+        direction = _direction;
+        texture = _texture;
+        isMove = true;
+    }
+    void processDirection(Player player) {
+        if (player.getPossition().x < possition.x)
+        {
+            direction.left = true;
+            direction.right = false;
+        }
+
+        if (player.getPossition().x > possition.x)
+        {
+            direction.right = true;
+            direction.left = false;
+        }
+        if (player.getPossition().y > possition.y)
+        {
+            direction.down = true;
+            direction.up = false;
+        }
+        if (player.getPossition().y < possition.y)
+        {
+            direction.up = true;
+            direction.down = false;
+        }
     }
 };
