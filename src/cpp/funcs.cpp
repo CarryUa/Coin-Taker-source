@@ -1,4 +1,5 @@
 #include<user/structs.h>
+#include<string>
 bool isTouching(Entity entity1, Entity entity2)
 {
     bool isHightOk = (entity1.getPossition().y + entity1.getSize().h / 2 >= entity2.getPossition().y - entity2.getSize().h / 2 && entity1.getPossition().y - entity1.getSize().h / 2 <= entity2.getPossition().y + entity2.getSize().h / 2);
@@ -7,4 +8,13 @@ bool isTouching(Entity entity1, Entity entity2)
         return true;
     else
         return false;
+}
+const char* intToChar(int value) {
+    const char* ch = std::to_string(value).c_str();
+    return ch;
+}
+App setText(const char* text, App app) {
+    app.textSurface = TTF_RenderText_Solid(app.font, text, { 255,255,255,255 });
+    app.textTexture = SDL_CreateTextureFromSurface(app.renderer, app.textSurface);
+    return app;
 }

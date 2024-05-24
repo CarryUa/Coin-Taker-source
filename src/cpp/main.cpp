@@ -6,7 +6,6 @@
 #include<user/init.h>
 #include<user/draw.h>
 #include<user/funcs.h>
-
 int main(int argc, char* argv[]) {
     srand(time(NULL));
     RGBA backgroundColor = { 0, 226, 255, 1 };
@@ -27,6 +26,10 @@ int main(int argc, char* argv[]) {
             coin.randomizePossition();
             score++;
         }
+        app = setText(intToChar(score), app);
+        drawTextBox({ 100,60 }, { 50, 60 }, { 128, 128, 128, 255 }, app);
+        app = setText("hp", app);
+        drawText({ 100,24 }, { 50, 82 }, app);
         presentScene(app);
         SDL_Delay(0);
     }

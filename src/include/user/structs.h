@@ -1,10 +1,14 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <ctime>
 #include <cstdlib>
 #include <user/defines.h>
 typedef struct {
     SDL_Window* window;
     SDL_Renderer* renderer;
+    TTF_Font* font;
+    SDL_Surface* textSurface;
+    SDL_Texture* textTexture;
 } App;
 typedef struct {
     int r;
@@ -153,6 +157,5 @@ public:
 
         possition.x = rand() % SCREEN_WIDTH;
         possition.y = rand() % SCREEN_HEIGHT;
-        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "possition: %d", possition.x, " %s", possition.y);
     }
 };

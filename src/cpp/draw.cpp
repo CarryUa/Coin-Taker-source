@@ -20,3 +20,23 @@ void draw(Entity entity, App app) {
     SDL_QueryTexture(entity.getTexture(), NULL, NULL, &dest.w, &dest.h);
     SDL_RenderCopy(app.renderer, entity.getTexture(), NULL, &dest);
 }
+void drawText(Size size, Possition pos, App app) {
+    SDL_Rect dest;
+    dest.w = size.w;
+    dest.h = size.h;
+    dest.x = pos.x - size.w / 2;
+    dest.y = pos.y - size.h / 2;
+    SDL_QueryTexture(app.textTexture, NULL, NULL, &dest.w, &dest.h);
+    SDL_RenderCopy(app.renderer, app.textTexture, NULL, &dest);
+}
+void drawTextBox(Size size, Possition pos, RGBA bgcolor, App app) {
+    SDL_Rect dest;
+    dest.w = size.w;
+    dest.h = size.h;
+    dest.x = pos.x - size.w / 2;
+    dest.y = pos.y - size.h / 2;
+    SDL_SetRenderDrawColor(app.renderer, bgcolor.r, bgcolor.g, bgcolor.b, bgcolor.a);
+    SDL_RenderFillRect(app.renderer, &dest);
+    SDL_QueryTexture(app.textTexture, NULL, NULL, &dest.w, &dest.h);
+    SDL_RenderCopy(app.renderer, app.textTexture, NULL, &dest);
+}
