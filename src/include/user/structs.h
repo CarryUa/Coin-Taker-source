@@ -92,6 +92,7 @@ public:
 };
 class Player : public Entity {
 protected:
+    int hp;
     void doKeyDown(SDL_KeyboardEvent* event) {
         if (event->keysym.scancode == SDL_SCANCODE_A) {
             isMove = direction.left = true;
@@ -124,9 +125,10 @@ protected:
 
     }
 public:
-    Player(Possition _pos, Size _size, Direction _direction, int _moveSpeed, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture)
+    Player(Possition _pos, Size _size, Direction _direction, int _moveSpeed, int _hp, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture)
     {
         possition = _pos;
+        hp = _hp;
         size = _size;
         direction = _direction;
         texture = _texture;
@@ -145,6 +147,12 @@ public:
                 doKeyUp(&event.key);
             }
         }
+    }
+    int getHP() {
+        return hp;
+    }
+    void setHP(int _hp) {
+        hp = _hp;
     }
 };
 class Coin : public Entity {

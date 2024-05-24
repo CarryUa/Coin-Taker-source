@@ -10,8 +10,12 @@
   - ## ~~add a ChekIfTouch function~~
   - ## ~~fix a random possition generator~~
   - ## ~~add score counter~~
-- ## add an enemy
-  - ## create a texture
+- ## ~~add an enemy~~
+  - ## ~~create a texture~~
   - ## ~~add an enemy class~~
   - ## ~~add a movement~~
-  - ## add HP mechanic
+  - ## ~~add HP mechanic~~
+- ## ~~add an end screen~~
+- ## create multiple enemys mechanic
+  - ## create an enemys vector
+  - ## create vector functions
