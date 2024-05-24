@@ -30,6 +30,11 @@ typedef struct {
     bool left;
     bool right;
 } Direction;
+typedef struct {
+    SDL_Texture* texture;
+    int w;
+    int h;
+} Texture;
 class Entity {
 protected:
     Possition possition;
@@ -37,9 +42,9 @@ protected:
     Direction direction;
     bool isMove = false;
     int moveSpeed;
-    SDL_Texture* texture;
+    Texture texture;
 public:
-    Entity(Possition _pos, Size _size, Direction _direction, int _moveSpeed, SDL_Texture* _texture)
+    Entity(Possition _pos, Size _size, Direction _direction, int _moveSpeed, Texture _texture)
     {
         possition = _pos;
         size = _size;
@@ -56,7 +61,7 @@ public:
     Direction getDirection() {
         return direction;
     }
-    SDL_Texture* getTexture() {
+    Texture getTexture() {
         return texture;
     }
     bool getIsMove() {
@@ -74,7 +79,7 @@ public:
     void setDirection(Direction _direction) {
         direction = _direction;
     }
-    void changeTexture(SDL_Texture* _texture) {
+    void changeTexture(Texture _texture) {
         texture = _texture;
     }
     void processMovement() {
@@ -125,7 +130,7 @@ protected:
 
     }
 public:
-    Player(Possition _pos, Size _size, Direction _direction, int _moveSpeed, int _hp, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture)
+    Player(Possition _pos, Size _size, Direction _direction, int _moveSpeed, int _hp, Texture _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture)
     {
         possition = _pos;
         hp = _hp;
@@ -157,7 +162,7 @@ public:
 };
 class Coin : public Entity {
 public:
-    Coin(Possition _pos, Size _size, Direction _direction, int _moveSpeed, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture) {
+    Coin(Possition _pos, Size _size, Direction _direction, int _moveSpeed, Texture _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture) {
         possition = _pos;
         size = _size;
         direction = _direction;
@@ -172,7 +177,7 @@ public:
 };
 class Enemy : public Entity {
 public:
-    Enemy(Possition _pos, Size _size, Direction _direction, int _moveSpeed, SDL_Texture* _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture) {
+    Enemy(Possition _pos, Size _size, Direction _direction, int _moveSpeed, Texture _texture) : Entity(_pos, _size, _direction, _moveSpeed, _texture) {
         possition = _pos;
         size = _size;
         direction = _direction;

@@ -11,9 +11,9 @@ int main(int argc, char* argv[]) {
     RGBA backgroundColor = { 0, 226, 255, 255 };
     int score = 0;
     App app = Init(app);
-    Coin coin({ 0,0 }, { 32,32 }, { false, false, false, false }, 0, loadTexture("src/textures/coin.png", app));
-    Enemy enemy({ 0,0 }, { 19,31 }, { false, false, false, false }, 2, loadTexture("src/textures/enemy.png", app));
-    Player player({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { 19,31 }, { false, false, false, false }, 4, 4, loadTexture("src/textures/hero.png", app));
+    Coin coin({ 0,0 }, { 32,32 }, { false, false, false, false }, 0, { loadTexture("src/textures/coin.png", app), 32, 32 });
+    Enemy enemy({ 0,0 }, { 64,64 }, { false, false, false, false }, 2, { loadTexture("src/textures/enemy.png", app), 32, 32 });
+    Player player({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { 64,64 }, { false, false, false, false }, 4, 4, { loadTexture("src/textures/hero.png", app), 32, 32 });
     coin.randomizePossition();
     while (player.getHP() != 0)
     {

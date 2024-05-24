@@ -4,6 +4,7 @@
 #include<user/defines.h>
 #include<SDL2/SDL_ttf.h>
 App Init(App app) {
+
     IMG_Init(IMG_INIT_PNG || IMG_INIT_JPG);
     app.window = SDL_CreateWindow("game v0.1", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_FOREIGN);
     app.renderer = SDL_CreateRenderer(app.window, -1, SDL_RENDERER_ACCELERATED);
