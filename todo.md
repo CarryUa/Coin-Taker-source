@@ -26,5 +26,6 @@
 - ## ~~add an end screen~~
 
 - ## create multiple enemys mechanic
-  - ## create an enemys vector
-  - ## create vector functions
+  - ## ~~create an enemy`s vector~~
+  - ## ~~create vector functions~~
+  - ## update enemy`s AI

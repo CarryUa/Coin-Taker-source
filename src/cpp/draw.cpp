@@ -12,6 +12,18 @@ SDL_Texture* loadTexture(const char* filePath, App app) {
     SDL_Texture* texture = IMG_LoadTexture(app.renderer, filePath);
     return texture;
 }
+void draw(Entity* entity, App app) {
+    SDL_Rect srcdest;
+    srcdest.w = entity->getTexture().w;
+    srcdest.h = entity->getTexture().h;
+    SDL_Rect dest;
+    dest.w = entity->getSize().w;
+    dest.h = entity->getSize().h;
+    dest.x = srcdest.x = entity->getPossition().x - entity->getSize().w / 2;
+    dest.y = srcdest.y = entity->getPossition().y - entity->getSize().h / 2;
+    SDL_QueryTexture(entity->getTexture().texture, NULL, NULL, &srcdest.w, &srcdest.h);
+    SDL_RenderCopy(app.renderer, entity->getTexture().texture, NULL, &dest);
+}
 void draw(Entity entity, App app) {
     SDL_Rect srcdest;
     srcdest.w = entity.getTexture().w;
