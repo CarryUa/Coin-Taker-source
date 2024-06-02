@@ -116,16 +116,16 @@ protected:
     void doKeyUp(SDL_KeyboardEvent* event) {
 
         if (event->keysym.scancode == SDL_SCANCODE_A) {
-            isMove = direction.left = false;
+            direction.left = false;
         }
         if (event->keysym.scancode == SDL_SCANCODE_W) {
-            isMove = direction.up = false;
+            direction.up = false;
         }
         if (event->keysym.scancode == SDL_SCANCODE_D) {
-            isMove = direction.right = false;
+            direction.right = false;
         }
         if (event->keysym.scancode == SDL_SCANCODE_S) {
-            isMove = direction.down = false;
+            direction.down = false;
         }
 
     }
@@ -150,6 +150,7 @@ public:
                 break;
             case SDL_KEYUP:
                 doKeyUp(&event.key);
+
             }
         }
     }

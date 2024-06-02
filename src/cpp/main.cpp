@@ -9,6 +9,7 @@
 #include<vector>
 int main(int argc, char* argv[]) {
     srand(time(NULL));
+    bool enemySpawned = true;
     std::vector<Enemy*> enemyVector;
     int i = 0;
     RGBA backgroundColor = { 0, 226, 255, 255 };
@@ -18,11 +19,9 @@ int main(int argc, char* argv[]) {
     Player player({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { 64,64 }, { false, false, false, false }, 4, 4, { loadTexture("src/textures/hero.png", app), 32, 32 });
     coin.randomizePossition();
     enemyVector.push_back(new Enemy({ 0,0 }, { 64,64 }, { false, false, false, false }, 2, { loadTexture("src/textures/enemy.png", app),  32, 32 }));
-    while (player.getHP() != 0)
+    while (player.getHP() > 0)
     {
         processScene(app, backgroundColor);
-        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "i = %d", i);
-
         draw(player, app);
         draw(coin, app);
         player.getInput();
@@ -31,20 +30,30 @@ int main(int argc, char* argv[]) {
         {
             coin.randomizePossition();
             score++;
+            enemySpawned = true;
         }
         app = setText(intToChar(score), app);
         drawTextBox({ 100,60 }, { 50, 60 }, { 128, 128, 128, 255 }, app);
         app = setText(intToChar(player.getHP()), app);
         drawText({ 100,24 }, { 50, 82 }, app);
-        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "WORCKS");
         for (i = 0;i < enemyVector.size(); i++) {
             enemyVector[i] = processEnemyVector(enemyVector[i], player, coin, app);
+            if (isTouching(player, enemyVector[i]))
+            {
+                for (i = 0;i < enemyVector.size(); i++) {
+                    enemyVector[i]->setPossition({ 0 + i * (enemyVector[i]->getSize().w),0 });
+                    player.setPossition({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
+                    coin.randomizePossition();
+                }
+                player.setHP(player.getHP() - 1);
+                SDL_Delay(1000);
+            }
         }
         presentScene(app);
-        if (score == 2) {
+        if (score % 10 == 0 && score != 0 && enemySpawned) {
             enemyVector.push_back(new Enemy({ 0,0 }, { 64,64 }, { false, false, false, false }, 2, { loadTexture("src/textures/enemy.png", app),  32, 32 }));
         }
-
+        enemySpawned = false;
         SDL_Delay(16);
     }
     //main loop
@@ -56,4 +65,5 @@ int main(int argc, char* argv[]) {
     SDL_Delay(5000);
     SDL_Quit();
     return 0;
+
 }

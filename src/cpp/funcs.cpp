@@ -33,13 +33,6 @@ Enemy* processEnemyVector(Enemy* enemy, Player& player, Coin& coin, App& app) {
     draw(enemy, app);
     enemy->processDirection(player);
     enemy->processMovement();
-    if (isTouching(player, enemy))
-    {
-        player.setHP(player.getHP() - 1);
-        SDL_Delay(1000);
-        enemy->setPossition({ 0,0 });
-        player.setPossition({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
-        coin.randomizePossition();
-    }
+
     return enemy;
 }
