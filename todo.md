@@ -5,7 +5,7 @@
 - ## ~~make a input function~~
 - ## ~~make a process movement function~~
 
-  - ## ~~ movement works but it`s glitchy [FIX LATER]~~
+  - ## ~~movement works but it`s glitchy [FIX LATER]~~
     - #### **_stupid error in setting `isMove` state along with directions_**
 
 - ## ~~add a coin~~
